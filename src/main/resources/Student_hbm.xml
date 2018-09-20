@@ -1,0 +1,23 @@
+<!-- 在hibernate，jar包中复制 jar依赖dtd文件声明 -->
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- 配置建立实体类与数据库的映射 -->
+<hibernate-mapping>
+	<!-- name:类名 table:当前类操作的表 通过实体类对表进行赋值-->
+	<class name="cn.alibaba.entity.Student" table="t_stu">
+		<!--主键映射使用id 其他属性name：类中的属性名 column:字段名列名  generator:主键生成策略-->
+		<!-- type指定注入数据类型 不添加则自动识别表中的数据类型 -->
+		<id name="tid" column="tid" type="string">
+			<!-- native主键生成策略 根据当前配置的数据库方言 自动选择数据库生成策略
+			identity 主键自动增长 适用所有数据库
+			increment 获取的当前主键的最大值 然后加1作为主键
+			assigned 不负责生成主键 需要程序员自己处理主键的生成。
+			uuid/hilo 生成不重复的主键值
+			-->
+			<!-- 存放的字符串类型一定要为32以上，不然无法存储uuid -->
+			<generator class="uuid"/>
+		</id>
+		<property name="tname" column="tname" type="string"></property>
+	</class>
+</hibernate-mapping>
